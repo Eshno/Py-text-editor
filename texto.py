@@ -1,11 +1,12 @@
 from tkinter import *
 from tkinter import filedialog
 
+
 class Texto:  
     def __init__(self, root):
         self.text = Text(root, width = 400, height = 400)
         self.text.pack()
-        self.text.insert(END, "Textazo man")
+        self.text.insert(END, "Texto Autogenerado by Albert")
 
     def justificar_izquierda(self):
         self.text.tag_delete('just-der')
@@ -32,6 +33,12 @@ class Texto:
         self.text.tag_add('negrita',0.0,END)
         self.text.tag_configure('negrita', font='helvetica 12 bold')
     
+    def italic(self):
+        self.text.tag_add('italicus',0.0,END)
+        self.text.tag_configure('italicus', font= 'helvetica 12 italic')
+    
+
+    
     def nuevoArchivo(self):        
         App.nombreArchivo = "Sin Titulo"
         self.text.delete(0.0, END)
@@ -43,7 +50,7 @@ class Texto:
         self.text.insert(0.0, t) 
     
     def guardarArchivo(self):        
-        t = text.get(0.0, END)
+        t = self.text.get(0.0, END)
         f = open(App.nombreArchivo, 'w')
         f.write(t)
         f.close()
