@@ -1,6 +1,6 @@
-from Tkinter import *
-from tkFileDialog import *
-from text import *
+from tkinter import *
+from tkinter import filedialog
+from texto import *
 from color import *
 
 nombreArchivo = None
@@ -11,7 +11,7 @@ def nuevoArchivo():
     text.delete(0.0, END)
     
 def abrirArchivo():
-    f = askopenfile(mode='r')
+    f = filedialog.askopenfile(mode='r')
     t = f.read()
     text.delete(0.0,END)
     text.insert(0.0, t)    
@@ -24,7 +24,7 @@ def guardarArchivo():
     f.close()
 
 def guardarComo():
-    f = asksaveasfile(mode='w', defaultextension='.txt')
+    f = filedialog.asksaveasfile(mode='w', defaultextension='.txt')
     t = text.get(0.0, END)
     try:
         f.write(t.rstrip())
@@ -52,14 +52,23 @@ text.insert(END, "Textazo man")
 # text.delete(0.0,END)
 
 def justificar_izquierda():
+    text.tag_delete('just-der')
+    text.tag_delete('just-cent')
+
     text.tag_add('just-izq',0.0,END)
     text.tag_configure('just-izq', justify="left")
 
 def justificar_derecha():
+    text.tag_delete('just-cent')
+    text.tag_delete('just-izq')
+
     text.tag_add('just-der',0.0,END)
     text.tag_configure('just-der', justify="right")
 
 def justificar_centro():
+    text.tag_delete('just-der')
+    text.tag_delete('just-izq')
+
     text.tag_add('just-cent',0.0,END)
     text.tag_configure('just-cent', justify="center")
 
@@ -70,6 +79,11 @@ def negrita():
 def italic():
     text.tag_add('italic',0.0,END)
     # text.tag_configure('italic', font='helvetica 12 italics')
+
+def underline():
+    
+    return
+    
 
     
     
@@ -110,9 +124,10 @@ menubar.add_cascade(label = "Fuente", menu=menufuente)
 
 #Menu de Parrafo
 menuparrafo = Menu(menubar)
-menuparrafo.add_command(label="Alinear Izquierda", command=justificar_izquierda)
+
 menuparrafo.add_command(label="Alinear Centro", command=justificar_centro)
 menuparrafo.add_command(label="Alinear Derecha", command=justificar_derecha)
+menuparrafo.add_command(label="Alinear Izquierda", command=justificar_izquierda)
 menubar.add_cascade(label = "Parrafo", menu=menuparrafo)
 
 
