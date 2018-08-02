@@ -19,30 +19,30 @@ class App:
         self.root.config(menu=self.menubar)
         self.root.mainloop()
 
-    @classmethod
-    def nuevoArchivo(cls, text):        
-        cls.nombreArchivo = "Sin Titulo"
-        text.delete(0.0, END)
-    @classmethod
-    def abrirArchivo(cls, text):
-        f = filedialog.askopenfile(mode='r')
-        t = f.read()
-        text.delete(0.0,END)
-        text.insert(0.0, t) 
-    @classmethod
-    def guardarArchivo(cls, text):        
-        t = text.get(0.0, END)
-        f = open(cls.nombreArchivo, 'w')
-        f.write(t)
-        f.close()
-    @classmethod
-    def guardarComo(cls, text):
-        f = filedialog.asksaveasfile(mode='w', defaultextension='.txt')
-        t = text.get(0.0, END)
-        try:
-            f.write(t.rstrip())
-        except:
-            showerror(title="Error", message= "No se pudo guardar el archivo")
+    # def nuevoArchivo(self):        
+    #     App.nombreArchivo = "Sin Titulo"
+    #     self.text.delete(0.0, END)
+    
+    # def abrirArchivo(self):
+    #     f = filedialog.askopenfile(mode='r')
+    #     t = f.read()
+    #     self.text.delete(0.0,END)
+    #     self.text.insert(0.0, t) 
+    
+    # def guardarArchivo(self):        
+    #     t = text.get(0.0, END)
+    #     f = open(App.nombreArchivo, 'w')
+    #     f.write(t)
+    #     f.close()
+    
+    # def guardarComo(self):
+    #     f = filedialog.asksaveasfile(mode='w', defaultextension='.txt')
+    #     t = self.text.get(0.0, END)
+    #     try:
+    #         f.write(t.rstrip())
+    #     except:
+    #         showerror(title="Error", message= "No se pudo guardar el archivo")    
+    
     
     def generarMenu(menubar,root,text):
         filemenu = Menu(menubar)
@@ -51,10 +51,10 @@ class App:
         menuparrafo = Menu(menubar)
 
         #Menu de Archivo
-        filemenu.add_command(label="Nuevo", command=App.nuevoArchivo(text))
-        filemenu.add_command(label="Abrir", command=App.abrirArchivo(text))
-        filemenu.add_command(label="Guardar", accelerator="Ctrl+G",command=App.guardarArchivo(text))
-        filemenu.add_command(label="Guardar Como", command=App.guardarComo(text))
+        filemenu.add_command(label="Nuevo", command=text.nuevoArchivo)
+        filemenu.add_command(label="Abrir", command=text.abrirArchivo)
+        filemenu.add_command(label="Guardar", accelerator="Ctrl+G",command=text.guardarArchivo)
+        filemenu.add_command(label="Guardar Como", command=text.guardarComo)
         filemenu.add_separator()
         filemenu.add_command(label="Salir", accelerator="Alt+F4",command=root.quit)
         
